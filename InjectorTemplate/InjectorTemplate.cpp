@@ -45,7 +45,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	case DLL_PROCESS_ATTACH:
 		version = GetGameVersion();
 		if (version != VERSION_UNKNOWN) Init();
-		else MessageBoxA(0, "Incompatible game version.", "Error", 0);
+		else MessageBoxA(0, "Incompatible game version. For now, only for RCT3plus.exe (Platinum). Contact me if you think this is wrong.", "Error", 0);
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

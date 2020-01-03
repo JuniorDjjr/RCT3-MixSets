@@ -71,9 +71,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameVersion.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="InjectorTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
