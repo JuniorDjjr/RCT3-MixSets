@@ -16,7 +16,7 @@ using namespace injector;
 using namespace std;
 
 string const projectName = TARGET_NAME;
-int const BUILD_NUMBER = 1;
+int const BUILD_NUMBER = 2;
 
 enum gameVersion
 {
@@ -27,9 +27,9 @@ gameVersion version;
 
 gameVersion GetGameVersion()
 {
-	switch (injector::ReadMemory<uint32_t>(0x155FB74, true))
+	switch (injector::ReadMemory<uint32_t>(0xF3F37C, true))
 	{
-	case 0x31303037:
+	case 0x005C3C10:
 		//MessageBoxA(0, "VERSION_A", "Game version", 0);
 		return VERSION_A;
 	default:
@@ -48,7 +48,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		else MessageBoxA(0, "Incompatible game version. For now, only for RCT3plus.exe (Platinum). Contact me if you think this is wrong.", "Error", 0);
 		break;
 	case DLL_THREAD_ATTACH:
+		break;
 	case DLL_THREAD_DETACH:
+		break;
 	case DLL_PROCESS_DETACH:
 		break;
 	}
