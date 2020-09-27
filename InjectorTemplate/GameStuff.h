@@ -3,11 +3,65 @@
 #include "injector/injector.hpp"
 #include "injector/assembly.hpp"
 
+enum gameVersion
+{
+	VERSION_PLATINUM,
+	VERSION_COMPLETE,
+	VERSION_UNKNOWN
+};
+extern gameVersion version;
+
 namespace Game {
 
 	uintptr_t GetGameplayStateRelatedInfos()
 	{
-		return ((uintptr_t(__cdecl *)())(0x00440FD0))();
+		if (version == gameVersion::VERSION_PLATINUM) {
+			return ((uintptr_t(__cdecl *)())(0x00440FD0))();
+		}
+		else {
+			return ((uintptr_t(__cdecl *)())(0x0055E450))();
+		}
+	}	
+
+	// Real name from C02680
+	uint32_t GetGameShellInstance()
+	{
+		if (version == gameVersion::VERSION_PLATINUM) {
+			return *(uint32_t*)(0x13D2EBC);
+		}
+		else {
+			return *(uint32_t*)(0x159D774);
+		}
+	}
+
+	uint32_t GetShowFPS()
+	{
+		if (version == gameVersion::VERSION_PLATINUM) {
+			return 0x1103C64;
+		}
+		else {
+			return 0x12CD1BC;
+		}
+	}
+
+	uint32_t GetShowPeopleEtcInfos()
+	{
+		if (version == gameVersion::VERSION_PLATINUM) {
+			return 0x1103C60;
+		}
+		else {
+			return 0x12CD1B9;
+		}
+	}
+
+	uint32_t GetShowDataPoolsInfos()
+	{
+		if (version == gameVersion::VERSION_PLATINUM) {
+			return 0x1103C61;
+		}
+		else {
+			return 0x12CD1BA;
+		}
 	}
 
 	// Real names from 440010
@@ -30,12 +84,5 @@ namespace Game {
 		StateCacheWarming = 0x13,
 		StateNumStates = 0x14
 	};
-
-	// Real name from C02680
-	auto &game_pGameShellInstance = *(uint32_t*)(0x13D2EBC);
-
-	auto &bShowFPS = *(uint32_t *)0x1103C64;
-	auto &bShowPeopleEtcInfos = *(bool *)0x1103C60;
-	auto &bShowDataPoolsInfos = *(bool *)0x1103C61;
 
 }
